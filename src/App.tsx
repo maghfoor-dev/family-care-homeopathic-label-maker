@@ -9,13 +9,30 @@ import { Button } from "./components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Textarea } from "./components/ui/textarea";
 
+const SKU_IDS = [
+  "code-1",
+  "code-2",
+  "code-3",
+  "code-4",
+  "code-5",
+  "code-6",
+  "code-7",
+];
+
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
+  const [searchedCodesLen, setSearchedCodesLen] = useState(0);
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
     setGreetMsg(await invoke("greet", { name }));
+  }
+
+  function createCodesArr(input: string) {
+    const finalStrArr = input.split("\n");
+    console.log(finalStrArr, "IS THE FINAL ARR");
+    setSearchedCodesLen(finalStrArr.length);
   }
 
   return (
@@ -57,12 +74,13 @@ function App() {
         <div className="flex flex-col justify-center gap-4">
           <Card className="min-card-width min-card-height">
             <CardHeader>
-              <CardTitle>SKU Codes (0)</CardTitle>
+              <CardTitle>SKU Codes ({searchedCodesLen})</CardTitle>
             </CardHeader>
             <CardContent>
               <Textarea
                 className="h-[400px]"
                 placeholder="Add your SKU codes here..."
+                onChange={(event) => createCodesArr(event.target.value)}
               ></Textarea>
             </CardContent>
           </Card>
