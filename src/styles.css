@@ -44,3 +44,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.min-card-width {
+  min-width: min(400px, 100vw);
+}
+
+.min-card-height {
+  min-height: min(500px, 100vh);
+}
