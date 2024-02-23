@@ -78,7 +78,7 @@ function App() {
             </CardHeader>
             <CardContent>
               <Textarea
-                className="h-[400px]"
+                className="h-[400px] bg-gray-300"
                 placeholder="Add your SKU codes here..."
                 onChange={(event) => createCodesArr(event.target.value)}
               ></Textarea>
@@ -92,7 +92,7 @@ function App() {
               <CardTitle>Found Codes (0)</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="bg-background h-[400px] py-2 px-3 rounded-md"></div>
+              <div className="bg-gray-300 h-[400px] py-2 px-3 rounded-md"></div>
             </CardContent>
           </Card>
           <Button variant={"secondary"}>Add to Queue</Button>
