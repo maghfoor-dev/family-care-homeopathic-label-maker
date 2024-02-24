@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MedicineListPage from "./pages/medicine-list.page";
 import HomePage from "./pages/home.page";
 import NavBar from "./components/custom-navbar";
+import PrintQueuePage from "./pages/print-queue.page";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/medicine-list",
     element: <MedicineListPage />,
+  },
+  {
+    path: "/print-queue",
+    element: <PrintQueuePage />,
   },
 ]);
 

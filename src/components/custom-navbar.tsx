@@ -15,9 +15,11 @@ export default function NavBar() {
       >
         Medicine List
       </NavigationMenuLink>
-      <Button className="bg-[#FFE882] text-black hover:bg-[#FFE882] hover:opacity-80">
-        Print Queue
-      </Button>
+      <NavigationMenuLink href="/print-queue">
+        <Button className="bg-[#FFE882] text-black hover:bg-[#FFE882] hover:opacity-80">
+          Print Queue
+        </Button>
+      </NavigationMenuLink>
     </NavigationMenu>
   );
 }
