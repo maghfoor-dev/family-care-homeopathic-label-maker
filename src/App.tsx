@@ -76,8 +76,9 @@ function App() {
   return (
     <div className="flex flex-col max-w-7xl mx-auto gap-9">
       <NavigationMenu className="justify-between p-4 max-w-7xl">
-        <p>FAMILY CARE</p>
+        <NavigationMenuLink href="/">FAMILY CARE</NavigationMenuLink>
         <NavigationMenuLink
+          href="/medicine-list"
           className={`${navigationMenuTriggerStyle()} underline cursor-pointer bg-transparent`}
         >
           Medicine List
