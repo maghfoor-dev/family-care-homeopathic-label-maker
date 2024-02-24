@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { invoke } from "@tauri-apps/api/tauri";
-import {
-  NavigationMenu,
-  NavigationMenuLink,
-  navigationMenuTriggerStyle,
-} from "../components/ui/navigation-menu";
+// import { invoke } from "@tauri-apps/api/tauri";
+// import {
+//   NavigationMenu,
+//   NavigationMenuLink,
+//   navigationMenuTriggerStyle,
+// } from "../components/ui/navigation-menu";
 import { Button } from "../components/ui/button";
 import {
   Card,
@@ -26,8 +26,8 @@ const SKU_IDS = [
 ];
 
 export default function HomePage() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  // const [greetMsg, setGreetMsg] = useState("");
+  // const [name, setName] = useState("");
   const [addedCodes, setAddedCodes] = useState<string[]>([]);
   const [foundCodes, setFoundCodes] = useState<string[]>([
     "code-1",
@@ -53,10 +53,10 @@ export default function HomePage() {
     "code-7",
   ]);
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke("greet", { name }));
-  }
+  // async function greet() {
+  //   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+  //   setGreetMsg(await invoke("greet", { name }));
+  // }
 
   function handleCodesInput(input: string) {
     const inputtedCodes = createCodesList(input);

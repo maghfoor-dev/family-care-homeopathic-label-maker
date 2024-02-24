@@ -5,7 +5,7 @@ export default function MedicineListPage() {
   const [medicines, setMedicines] = useState([]);
 
   async function getMedicineList() {
-    const response = await db.select("SELECT * FROM medicine_list;");
+    const response = await (await db).select("SELECT * FROM medicine_list;");
 
     console.log(response, "IS THE RESPONSE");
     setMedicines(response as any);
