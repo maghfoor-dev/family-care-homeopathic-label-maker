@@ -8,6 +8,7 @@ import {
 import { Button } from "./components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Textarea } from "./components/ui/textarea";
+import { createCodesList } from "./lib/utils";
 
 const SKU_IDS = [
   "code-1",
@@ -52,20 +53,9 @@ function App() {
     setGreetMsg(await invoke("greet", { name }));
   }
 
-  function createCodesArr(input: string) {
-    // splitting codes by lines
-    const inputCodes: string[] = input.split("\n");
-
-    // removing any spaces from the codes
-    const removedSpacesCodes: string[] = inputCodes.map((code) =>
-      code.replace(/\s/g, "")
-    );
-
-    // removing any empty strings
-    const finalCodes = removedSpacesCodes.filter((code) => code.length > 0);
-
-    //settings codes to states
-    setAddedCodes(finalCodes);
+  function handleCodesInput(input: string) {
+    const inputtedCodes = createCodesList(input);
+    setAddedCodes(inputtedCodes);
   }
 
   function handleFindCodes() {
@@ -128,7 +118,7 @@ function App() {
               <Textarea
                 className="h-[400px] bg-gray-300"
                 placeholder="Add your SKU codes here..."
-                onChange={(event) => createCodesArr(event.target.value)}
+                onChange={(event) => handleCodesInput(event.target.value)}
               ></Textarea>
             </CardContent>
           </Card>
