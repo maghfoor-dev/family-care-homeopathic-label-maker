@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import db from "@/lib/database";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function MedicineListPage() {
   const [medicines, setMedicines] = useState([]);
@@ -11,9 +13,13 @@ export default function MedicineListPage() {
     setMedicines(response as any);
   }
   return (
-    <section>
-      <h1>THIS IS THE MEDICINE LIST PAGE.</h1>
-      <button onClick={getMedicineList}>GET MEDICINES</button>
+    <section className="flex flex-col gap-2">
+      <Link to={"/add-medicine"}>
+      <Button>Add a Medicine</Button>
+     </Link> 
+     <div>
+      <Button onClick={getMedicineList}>GET MEDICINES</Button>
+     </div> 
       <p>{JSON.stringify(medicines, null, 0)}</p>
     </section>
   );
