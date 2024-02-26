@@ -14,12 +14,12 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 const formSchema = z.object({
   name: z.string().min(2),
-  potency: z.string(),
-  quantity: z.string(),
-  sticker_name: z.string(),
-  sku_code: z.string(),
-  category: z.string(),
-  stored_location: z.string(),
+  potency: z.string().min(2),
+  quantity: z.string().min(2),
+  sticker_name: z.string().min(2),
+  sku_code: z.string().min(2),
+  category: z.string().min(2),
+  stored_location: z.string().min(2),
 });
 export default function AddMedicineForm() {
   const form = useForm<z.infer<typeof formSchema>>({
