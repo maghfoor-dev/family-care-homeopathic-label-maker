@@ -11,7 +11,7 @@ const formSchema = z.object({
     potency: z.string(),
     quantity: z.string(),
     sticker_name: z.string(),
-    sku_number: z.string(),
+    sku_code: z.string(),
     category: z.string(),
     stored_location: z.string()
 })
@@ -34,6 +34,55 @@ export default function AddMedicineForm() {
                 </FormControl>
                </FormItem> 
             )}/>
+            <FormField control={form.control} name="potency" render={({ field} ) => (
+               <FormItem>
+                <FormLabel>Medicine Potency</FormLabel>
+                <FormControl>
+                    <Input placeholder="Enter medicine potentcy..." {...field}/>
+                </FormControl>
+               </FormItem> 
+            )}/>
+            <FormField control={form.control} name="quantity" render={({ field} ) => (
+               <FormItem>
+                <FormLabel>Medicine Quantity</FormLabel>
+                <FormControl>
+                    <Input placeholder="Enter medicine quantity..." {...field}/>
+                </FormControl>
+               </FormItem> 
+            )}/>
+            <FormField control={form.control} name="sticker_name" render={({ field} ) => (
+               <FormItem>
+                <FormLabel>Medicine Sticker Name</FormLabel>
+                <FormControl>
+                    <Input placeholder="Enter medicine sticker name..." {...field}/>
+                </FormControl>
+               </FormItem> 
+            )}/>
+            <FormField control={form.control} name="sku_code" render={({ field} ) => (
+               <FormItem>
+                <FormLabel>Medicine SKU Code</FormLabel>
+                <FormControl>
+                    <Input placeholder="Enter medicine sku code..." {...field}/>
+                </FormControl>
+               </FormItem> 
+            )}/>
+            <FormField control={form.control} name="category" render={({ field} ) => (
+               <FormItem>
+                <FormLabel>Medicine Category</FormLabel>
+                <FormControl>
+                    <Input placeholder="Enter medicine category..." {...field}/>
+                </FormControl>
+               </FormItem> 
+            )}/>
+            <FormField control={form.control} name="stored_location" render={({ field} ) => (
+               <FormItem>
+                <FormLabel>Medicine Stored Location</FormLabel>
+                <FormControl>
+                    <Input placeholder="Enter medicine storage location..." {...field}/>
+                </FormControl>
+               </FormItem> 
+            )}/>
+                
             <Button type="submit">Submit</Button> 
             </form>
     </Form>
