@@ -1,9 +1,9 @@
-import { Button } from "./ui/button";
+import { Button } from "../components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuLink,
   navigationMenuTriggerStyle,
-} from "./ui/navigation-menu";
+} from "../components/ui/navigation-menu";
 
 export default function NavBar() {
   return (

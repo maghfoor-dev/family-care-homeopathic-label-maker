@@ -4,7 +4,7 @@ import "./styles.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MedicineListPage from "./pages/medicine-list.page";
 import HomePage from "./pages/home.page";
-import NavBar from "./components/custom-navbar";
+import NavBar from "./modules/navbar";
 import PrintQueuePage from "./pages/print-queue.page";
 import AddMedicineForm from "./pages/add-medicine.page";
 import { Toaster } from "./components/ui/toaster";
