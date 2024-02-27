@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import db from "./database";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -18,4 +19,12 @@ export function createCodesList(input: string) {
   const finalCodes = removedSpacesCodes.filter((code) => code.length > 0);
 
   return finalCodes;
+}
+
+export async function getAllMedicines() {
+  const database = await db;
+  const medicines = await database.select("SELECT * FROM medicine_list;");
+  database.close();
+
+  return medicines;
 }
