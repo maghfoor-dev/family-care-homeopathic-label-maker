@@ -25,7 +25,7 @@ const formSchema = z.object({
   quantity: z.string().min(2),
   sticker_name: z.string().min(2),
   sku_code: z.string().min(2),
-  category: z.string().min(2),
+  category: z.string().min(1),
   stored_location: z.string().min(2),
 });
 export default function AddMedicineForm() {
