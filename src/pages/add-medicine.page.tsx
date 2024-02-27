@@ -30,101 +30,100 @@ export default function AddMedicineForm() {
     console.log(values, "ARE THE FORM INPUT VALUES");
   }
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Medicine Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter medicine name..." {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="potency"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Medicine Potency</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter medicine potentcy..." {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="quantity"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Medicine Quantity</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter medicine quantity..." {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="sticker_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Medicine Sticker Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter medicine sticker name..."
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="sku_code"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Medicine SKU Code</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter medicine sku code..." {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Medicine Category</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter medicine category..." {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="stored_location"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Medicine Stored Location</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter medicine storage location..."
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+    <section>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-2 p-4 max-w-xl mx-auto"
+        >
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Medicine Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Arneca" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="potency"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Medicine Potency</FormLabel>
+                <FormControl>
+                  <Input placeholder="30c" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="quantity"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Medicine Quantity</FormLabel>
+                <FormControl>
+                  <Input placeholder="25g" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="sticker_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Medicine Sticker Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Arneca" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="sku_code"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Medicine SKU Code</FormLabel>
+                <FormControl>
+                  <Input placeholder="ARNECA-30C-25g-2A2-P-10023" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Medicine Category</FormLabel>
+                <FormControl>
+                  <Input placeholder="P" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="stored_location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Medicine Stored Location</FormLabel>
+                <FormControl>
+                  <Input placeholder="2A2" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+    </section>
   );
 }
