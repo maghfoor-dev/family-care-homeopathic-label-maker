@@ -9,6 +9,13 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -98,18 +105,6 @@ export default function AddMedicineForm() {
           />
           <FormField
             control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Medicine Category</FormLabel>
-                <FormControl>
-                  <Input placeholder="P" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="stored_location"
             render={({ field }) => (
               <FormItem>
@@ -117,6 +112,31 @@ export default function AddMedicineForm() {
                 <FormControl>
                   <Input placeholder="2A2" {...field} />
                 </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Medicine Stored Location</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Category" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="P">P</SelectItem>
+                    <SelectItem value="Q">Q</SelectItem>
+                    <SelectItem value="AIDS">AIDS</SelectItem>
+                    <SelectItem value="CREAM">CREAM</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
           />
