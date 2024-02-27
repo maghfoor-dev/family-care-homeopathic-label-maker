@@ -24,7 +24,6 @@ export function createCodesList(input: string) {
 export async function getAllMedicines() {
   const database = await db;
   const medicines = await database.select("SELECT * FROM medicine_list;");
-  database.close();
 
   return medicines;
 }

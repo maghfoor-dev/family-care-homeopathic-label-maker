@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import db from "@/lib/database";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -28,13 +29,26 @@ const formSchema = z.object({
   category: z.string().min(1),
   stored_location: z.string().min(2),
 });
+
+async function addMedicineToDatabase(data: z.infer<typeof formSchema>) {
+  console.log(data, 'IS THE DATA')
+  const {name, potency, quantity, sticker_name, sku_code, category, stored_location } = data;
+
+  const query = `INSERT INTO medicine_list (name, potency, quantity, sticker_name, sku_code, category, stored_location) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)`;
+  const params = [name, potency, quantity, sticker_name, sku_code, category, stored_location]
+  const database = await db;
+  const response = await database.execute(query, params)
+  return response
+}
+
 export default function AddMedicineForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values, "ARE THE FORM INPUT VALUES");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const successfullyAdded = await addMedicineToDatabase(values)
+    console.log(successfullyAdded, 'IS THE SUCESSFULLY ADDED VALUE ON SUBMITTING THE FORM')
   }
   return (
     <section>
