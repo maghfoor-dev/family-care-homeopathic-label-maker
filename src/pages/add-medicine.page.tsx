@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
 import db from "@/lib/database";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -42,6 +43,8 @@ async function addMedicineToDatabase(data: z.infer<typeof formSchema>) {
 }
 
 export default function AddMedicineForm() {
+  const { toast } = useToast()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
@@ -49,7 +52,21 @@ export default function AddMedicineForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const successfullyAdded = await addMedicineToDatabase(values)
     console.log(successfullyAdded, 'IS THE SUCESSFULLY ADDED VALUE ON SUBMITTING THE FORM')
+    if (successfullyAdded) {
+      toast({
+       title: 'Medicine Added!',
+       description: `${values.name} has been added sucessfully.`,
+       variant: 'success'
+      })
+    } else if (!successfullyAdded) {
+      toast({
+        title: 'Oops!',
+        description: 'Something has gone wrong. Please make sure input is correct.',
+        variant: "destructive"
+      })
+    }
   }
+
   return (
     <section>
       <Form {...form}>

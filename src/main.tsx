@@ -7,6 +7,7 @@ import HomePage from "./pages/home.page";
 import NavBar from "./components/custom-navbar";
 import PrintQueuePage from "./pages/print-queue.page";
 import AddMedicineForm from "./pages/add-medicine.page";
+import { Toaster } from "./components/ui/toaster";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <NavBar />
       {/* <App /> */}
       <RouterProvider router={router} />
+      <Toaster />
     </main>
   </React.StrictMode>
 );
