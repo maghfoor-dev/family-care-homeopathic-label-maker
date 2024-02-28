@@ -23,9 +23,6 @@ export default function MedicineListPage() {
       <Link to={"/add-medicine"}>
       <Button>Add a Medicine</Button>
      </Link> 
-     <div>
-      <Button onClick={getMedicineList}>GET MEDICINES</Button>
-     </div>
      </div> 
       <DataTable columns={columns} data={medicines} />
     </section>
