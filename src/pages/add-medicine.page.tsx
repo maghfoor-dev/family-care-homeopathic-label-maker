@@ -110,9 +110,13 @@ export default function AddMedicineForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Medicine Name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Arneca" {...field} />
+                  <Input
+                    className="bg-gray-100"
+                    placeholder="Arneca"
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -122,13 +126,13 @@ export default function AddMedicineForm() {
             name="potency"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Medicine Potency</FormLabel>
+                <FormLabel>Potency</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-gray-100">
                       <SelectValue placeholder="Select Potency" />
                     </SelectTrigger>
                   </FormControl>
@@ -147,13 +151,13 @@ export default function AddMedicineForm() {
             name="quantity"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Medicine Quantity</FormLabel>
+                <FormLabel>Quantity</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-gray-100">
                       <SelectValue placeholder="Select Quantity" />
                     </SelectTrigger>
                   </FormControl>
@@ -170,52 +174,16 @@ export default function AddMedicineForm() {
           />
           <FormField
             control={form.control}
-            name="sticker_name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Medicine Sticker Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Arneca" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="sku_code"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Medicine SKU Code</FormLabel>
-                <FormControl>
-                  <Input placeholder="ARNECA-30C-25g-2A2-P-10023" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="stored_location"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Medicine Stored Location</FormLabel>
-                <FormControl>
-                  <Input placeholder="2A2" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="category"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Medicine Stored Location</FormLabel>
+                <FormLabel>Category</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-gray-100">
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
                   </FormControl>
@@ -231,6 +199,52 @@ export default function AddMedicineForm() {
                     <SelectItem value="TSLF">TSLF</SelectItem>
                   </SelectContent>
                 </Select>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="sticker_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Sticker Name</FormLabel>
+                <FormControl>
+                  <Input
+                    className="bg-gray-100"
+                    placeholder="Arneca"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="stored_location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Stored Location</FormLabel>
+                <FormControl>
+                  <Input className="bg-gray-100" placeholder="2A2" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="sku_code"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>SKU Code</FormLabel>
+                <FormControl>
+                  <Input
+                    className="bg-gray-100"
+                    placeholder="ARNECA-30C-25g-2A2-P-10023"
+                    {...field}
+                  />
+                </FormControl>
               </FormItem>
             )}
           />
