@@ -4,7 +4,7 @@ export type MedicineType = {
   potency: string;
   quantity: string;
   sticker_name: string;
-  sku_number: string;
+  sku_code: string;
   category: string;
   stored_location: string;
 };

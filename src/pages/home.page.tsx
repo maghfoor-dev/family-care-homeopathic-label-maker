@@ -35,21 +35,6 @@ export default function HomePage() {
     "code-3",
     "code-4",
     "code-5",
-    "code-6",
-    "code-7",
-    "code-1",
-    "code-2",
-    "code-3",
-    "code-4",
-    "code-5",
-    "code-6",
-    "code-7",
-    "code-1",
-    "code-2",
-    "code-3",
-    "code-4",
-    "code-5",
-    "code-6",
     "code-7",
   ]);
 
@@ -72,8 +57,6 @@ export default function HomePage() {
         foundCodesArr.push(code);
       }
     }
-
-    console.log(foundCodes, "ARE THE FOUND CODES");
 
     setFoundCodes(foundCodesArr);
   }

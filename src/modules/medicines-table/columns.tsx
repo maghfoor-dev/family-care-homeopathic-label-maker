@@ -25,6 +25,18 @@ export const columns: ColumnDef<MedicineType>[] = [
     header: "Quantity",
   },
   {
+    accessorKey: "sku_code",
+    header: "SKU Code",
+  },
+  {
+    accessorKey: "category",
+    header: "Category",
+  },
+  {
+    accessorKey: "stored_location",
+    header: "Stored Location",
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const medicine = row.original;
@@ -43,7 +55,7 @@ export const columns: ColumnDef<MedicineType>[] = [
                 <p>Stored Location: {medicine.stored_location}</p>
                 <p>Potency: {medicine.potency}</p>
                 <p>Quantity: {medicine.quantity}</p>
-                <p>SKU Code: {medicine.sku_number}</p>
+                <p>SKU Code: {medicine.sku_code}</p>
                 <p>Category: {medicine.category}</p>
                 <p>Sticker Name: {medicine.sticker_name}</p>
                 <Button>Change</Button>
