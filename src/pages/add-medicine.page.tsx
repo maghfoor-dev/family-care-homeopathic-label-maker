@@ -24,8 +24,8 @@ import z from "zod";
 
 const formSchema = z.object({
   name: z.string().min(2),
-  potency: z.string().min(2),
-  quantity: z.string().min(2),
+  potency: z.enum(["6C", "30C", "200C", "1M"]),
+  quantity: z.enum(["8g", "16g", "25g", "10mL", "30mL"]),
   sticker_name: z.string().min(2),
   sku_code: z.string().min(2),
   category: z.enum([
@@ -123,9 +123,22 @@ export default function AddMedicineForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Medicine Potency</FormLabel>
-                <FormControl>
-                  <Input placeholder="30c" {...field} />
-                </FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Potency" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="6C">6C</SelectItem>
+                    <SelectItem value="30C">30C</SelectItem>
+                    <SelectItem value="200C">200C</SelectItem>
+                    <SelectItem value="1M">1M</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
           />
