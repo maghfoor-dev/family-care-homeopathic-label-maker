@@ -148,9 +148,23 @@ export default function AddMedicineForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Medicine Quantity</FormLabel>
-                <FormControl>
-                  <Input placeholder="25g" {...field} />
-                </FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Quantity" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="8g">8g</SelectItem>
+                    <SelectItem value="16g">16g</SelectItem>
+                    <SelectItem value="25g">25g</SelectItem>
+                    <SelectItem value="10mL">10mL</SelectItem>
+                    <SelectItem value="30mL">30mL</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
           />
