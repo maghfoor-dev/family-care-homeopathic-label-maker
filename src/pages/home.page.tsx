@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import { Textarea } from "../components/ui/textarea";
-import { createCodesList } from "../lib/utils";
+import { createCodesList, getAllMedicines } from "../lib/utils";
 
 const SKU_IDS = [
   "code-1",
@@ -48,12 +48,14 @@ export default function HomePage() {
     setAddedCodes(inputtedCodes);
   }
 
-  function handleFindCodes() {
+  async function handleFindCodes() {
     const foundCodesArr: string[] = [];
 
+    const medicines = await getAllMedicines();
+    const medicineIds = medicines.map((medicine) => medicine.sku_code);
+
     for (const code of addedCodes) {
-      console.log(code);
-      if (SKU_IDS.includes(code)) {
+      if (medicineIds.includes(code)) {
         foundCodesArr.push(code);
       }
     }
