@@ -29,14 +29,7 @@ export default function HomePage() {
   // const [greetMsg, setGreetMsg] = useState("");
   // const [name, setName] = useState("");
   const [addedCodes, setAddedCodes] = useState<string[]>([]);
-  const [foundCodes, setFoundCodes] = useState<string[]>([
-    "code-1",
-    "code-2",
-    "code-3",
-    "code-4",
-    "code-5",
-    "code-7",
-  ]);
+  const [foundCodes, setFoundCodes] = useState<string[]>([]);
 
   // async function greet() {
   //   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
