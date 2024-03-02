@@ -30,6 +30,7 @@ export default function HomePage() {
   // const [name, setName] = useState("");
   const [addedCodes, setAddedCodes] = useState<string[]>([]);
   const [foundCodes, setFoundCodes] = useState<string[]>([]);
+  const [searchingMedicines, setSearchingMedicines] = useState<boolean>(false);
 
   // async function greet() {
   //   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -42,6 +43,7 @@ export default function HomePage() {
   }
 
   async function handleFindCodes() {
+    setSearchingMedicines(true);
     const foundCodesArr: string[] = [];
 
     const medicines = await getAllMedicines();
@@ -54,6 +56,7 @@ export default function HomePage() {
     }
 
     setFoundCodes(foundCodesArr);
+    setSearchingMedicines(false);
   }
 
   return (
@@ -93,7 +96,11 @@ export default function HomePage() {
               ></Textarea>
             </CardContent>
           </Card>
-          <Button variant={"secondary"} onClick={handleFindCodes}>
+          <Button
+            disabled={searchingMedicines}
+            variant={"secondary"}
+            onClick={handleFindCodes}
+          >
             Search Codes
           </Button>
         </div>
