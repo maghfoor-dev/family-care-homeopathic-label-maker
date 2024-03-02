@@ -21,49 +21,80 @@ import db from "@/lib/database";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
+
 const formSchema = z.object({
   name: z.string().min(2),
   potency: z.string().min(2),
   quantity: z.string().min(2),
   sticker_name: z.string().min(2),
   sku_code: z.string().min(2),
-  category: z.string().min(1),
+  category: z.enum([
+    "P",
+    "Q",
+    "AIDS",
+    "CREAM",
+    "TABLETS",
+    "OIL",
+    "TST",
+    "TSLF",
+    "DROPS",
+  ]),
   stored_location: z.string().min(2),
 });
 
 async function addMedicineToDatabase(data: z.infer<typeof formSchema>) {
-  console.log(data, 'IS THE DATA')
-  const {name, potency, quantity, sticker_name, sku_code, category, stored_location } = data;
+  console.log(data, "IS THE DATA");
+  const {
+    name,
+    potency,
+    quantity,
+    sticker_name,
+    sku_code,
+    category,
+    stored_location,
+  } = data;
 
   const query = `INSERT INTO medicine_list (name, potency, quantity, sticker_name, sku_code, category, stored_location) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)`;
-  const params = [name, potency, quantity, sticker_name, sku_code, category, stored_location]
+  const params = [
+    name,
+    potency,
+    quantity,
+    sticker_name,
+    sku_code,
+    category,
+    stored_location,
+  ];
   const database = await db;
-  const response = await database.execute(query, params)
-  return response
+  const response = await database.execute(query, params);
+  return response;
 }
 
 export default function AddMedicineForm() {
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const successfullyAdded = await addMedicineToDatabase(values)
-    console.log(successfullyAdded, 'IS THE SUCESSFULLY ADDED VALUE ON SUBMITTING THE FORM')
+    const successfullyAdded = await addMedicineToDatabase(values);
+    console.log(
+      successfullyAdded,
+      "IS THE SUCESSFULLY ADDED VALUE ON SUBMITTING THE FORM"
+    );
     if (successfullyAdded) {
       toast({
-       title: 'Medicine Added!',
-       description: `${values.name} has been added sucessfully.`,
-       variant: 'success'
-      })
+        title: "Medicine Added!",
+        description: `${values.name} has been added sucessfully.`,
+        variant: "success",
+      });
     } else if (!successfullyAdded) {
       toast({
-        title: 'Oops!',
-        description: 'Something has gone wrong. Please make sure input is correct.',
-        variant: "destructive"
-      })
+        title: "Oops!",
+        description:
+          "Something has gone wrong. Please make sure input is correct.",
+        variant: "destructive",
+      });
     }
   }
 
@@ -166,6 +197,11 @@ export default function AddMedicineForm() {
                     <SelectItem value="Q">Q</SelectItem>
                     <SelectItem value="AIDS">AIDS</SelectItem>
                     <SelectItem value="CREAM">CREAM</SelectItem>
+                    <SelectItem value="DROPS">DROPS</SelectItem>
+                    <SelectItem value="OIL">OIL</SelectItem>
+                    <SelectItem value="TABLETS">TABLETS</SelectItem>
+                    <SelectItem value="TST">TST</SelectItem>
+                    <SelectItem value="TSLF">TSLF</SelectItem>
                   </SelectContent>
                 </Select>
               </FormItem>
