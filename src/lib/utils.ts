@@ -30,3 +30,9 @@ export async function getAllMedicines() {
 
   return medicines;
 }
+
+export async function deleteMedicine(id: string | number) {
+const database = await db;
+const result = await database.execute(`DELETE FROM medicine_list where id = ${id}`)
+return result
+}
