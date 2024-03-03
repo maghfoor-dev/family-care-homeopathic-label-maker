@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { MedicineType } from "@/types";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -19,8 +20,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import UpdateMedicineForm from "../update-medicine-form";
+import { deleteMedicine } from "@/lib/utils";
 
 export const columns: ColumnDef<MedicineType>[] = [
   {
@@ -69,22 +71,29 @@ export const columns: ColumnDef<MedicineType>[] = [
                 <p>SKU Code: {medicine.sku_code}</p>
                 <p>Category: {medicine.category}</p>
                 <p>Sticker Name: {medicine.sticker_name}</p>
-               <Dialog>
-      <DialogTrigger asChild>
-        <Button>Change</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Change Medicine</DialogTitle>
-          <DialogDescription>
-            Make changes to the medicine here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
-         <UpdateMedicineForm currentMedicine={medicine} /> 
-      </DialogContent>
-    </Dialog>  
-                <Button variant={"destructive"}>Delete</Button>
-               
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button>Change</Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Change Medicine</DialogTitle>
+                      <DialogDescription>
+                        Make changes to the medicine here. Click save when
+                        you're done.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <UpdateMedicineForm currentMedicine={medicine} />
+                  </DialogContent>
+                </Dialog>{" "}
+                <SheetClose asChild>
+                  <Button
+                    variant={"destructive"}
+                    onClick={async () => await deleteMedicine(medicine.id)}
+                  >
+                    Delete
+                  </Button>
+                </SheetClose>
               </SheetDescription>
             </SheetHeader>
           </SheetContent>

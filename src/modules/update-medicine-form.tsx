@@ -44,39 +44,12 @@ const formSchema = z.object({
   stored_location: z.string().min(2),
 });
 
-async function addMedicineToDatabase(data: z.infer<typeof formSchema>) {
-  const {
-    name,
-    potency,
-    quantity,
-    sticker_name,
-    sku_code,
-    category,
-    stored_location,
-  } = data;
-
-  const query = `INSERT INTO medicine_list (name, potency, quantity, sticker_name, sku_code, category, stored_location) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)`;
-  const params = [
-    name,
-    potency,
-    quantity,
-    sticker_name,
-    sku_code,
-    category,
-    stored_location,
-  ];
-  const database = await db;
-  const response = await database.execute(query, params);
-  return response;
-}
-
 export default function UpdateMedicineForm({
   currentMedicine,
 }: {
   currentMedicine: MedicineType;
 }) {
-
-    console.log(currentMedicine, 'IS THE CURRENT MEDICINE PASSED INTO THE FORM')
+  console.log(currentMedicine, "IS THE CURRENT MEDICINE PASSED INTO THE FORM");
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -84,7 +57,7 @@ export default function UpdateMedicineForm({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const successfullyAdded = await addMedicineToDatabase(values);
+    const successfullyAdded = await updateMedicineInDatabase(values);
     console.log(
       successfullyAdded,
       "IS THE SUCESSFULLY ADDED VALUE ON SUBMITTING THE FORM"
@@ -103,6 +76,38 @@ export default function UpdateMedicineForm({
         variant: "destructive",
       });
     }
+  }
+
+  async function updateMedicineInDatabase(data: z.infer<typeof formSchema>) {
+    const {
+      name,
+      potency,
+      quantity,
+      sticker_name,
+      sku_code,
+      category,
+      stored_location,
+    } = data;
+
+    const query = `
+    UPDATE medicine_list 
+    SET name = ?1, potency = ?2, quantity = ?3, sticker_name = ?4, 
+        sku_code = ?5, category = ?6, stored_location = ?7 
+    WHERE id = ?8`;
+
+    const params = [
+      name,
+      potency,
+      quantity,
+      sticker_name,
+      sku_code,
+      category,
+      stored_location,
+      currentMedicine.id,
+    ];
+    const database = await db;
+    const response = await database.execute(query, params);
+    return response;
   }
 
   return (
@@ -235,7 +240,12 @@ export default function UpdateMedicineForm({
               <FormItem>
                 <FormLabel>Stored Location</FormLabel>
                 <FormControl>
-                  <Input className="bg-gray-100" placeholder="2A2" defaultValue={currentMedicine.stored_location} {...field} />
+                  <Input
+                    className="bg-gray-100"
+                    placeholder="2A2"
+                    defaultValue={currentMedicine.stored_location}
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -258,9 +268,9 @@ export default function UpdateMedicineForm({
               </FormItem>
             )}
           />
-        <DialogClose asChild> 
-          <Button type="submit">Update</Button>
-         </DialogClose> 
+          {/* <DialogClose asChild> */}
+            <Button type="submit">Update</Button>
+          {/* </DialogClose> */}
         </form>
       </Form>
     </section>
