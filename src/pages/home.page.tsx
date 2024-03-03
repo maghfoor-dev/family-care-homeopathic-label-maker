@@ -15,6 +15,7 @@ import {
 import { Textarea } from "../components/ui/textarea";
 import { createCodesList, getAllMedicines } from "../lib/utils";
 
+
 const SKU_IDS = [
   "code-1",
   "code-2",
