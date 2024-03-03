@@ -114,7 +114,7 @@ export default function AddMedicineForm() {
                 <FormControl>
                   <Input
                     className="bg-gray-100"
-                    placeholder="Arneca"
+                    placeholder="Arnica"
                     {...field}
                   />
                 </FormControl>
@@ -212,7 +212,7 @@ export default function AddMedicineForm() {
                 <FormControl>
                   <Input
                     className="bg-gray-100"
-                    placeholder="Arneca"
+                    placeholder="Arnica"
                     {...field}
                   />
                 </FormControl>
