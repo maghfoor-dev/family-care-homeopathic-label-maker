@@ -54,6 +54,15 @@ export default function UpdateMedicineForm({
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: formSchema.parse({
+     name: currentMedicine.name,
+    category: currentMedicine.category,
+    potency: currentMedicine.potency,
+    quantity: currentMedicine.quantity,
+    sticker_name: currentMedicine.sticker_name,
+    sku_code: currentMedicine.sku_code,
+    stored_location: currentMedicine.stored_location  
+    })
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -64,8 +73,8 @@ export default function UpdateMedicineForm({
     );
     if (successfullyAdded) {
       toast({
-        title: "Medicine Added!",
-        description: `${values.name} has been added sucessfully.`,
+        title: "Medicine Updated!",
+        description: `${values.name} has been updated sucessfully.`,
         variant: "success",
       });
     } else if (!successfullyAdded) {
@@ -243,8 +252,8 @@ export default function UpdateMedicineForm({
                   <Input
                     className="bg-gray-100"
                     placeholder="2A2"
-                    defaultValue={currentMedicine.stored_location}
                     {...field}
+                    defaultValue={currentMedicine.stored_location}
                   />
                 </FormControl>
               </FormItem>
@@ -268,9 +277,9 @@ export default function UpdateMedicineForm({
               </FormItem>
             )}
           />
-          {/* <DialogClose asChild> */}
+          <DialogClose asChild>
             <Button type="submit">Update</Button>
-          {/* </DialogClose> */}
+          </DialogClose>
         </form>
       </Form>
     </section>
