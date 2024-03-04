@@ -1,23 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { getAllMedicines } from "@/lib/utils";
+import useGetMedicines from "@/hooks/use-get-medicines";
 import { columns } from "@/modules/medicines-table/columns";
 import { DataTable } from "@/modules/medicines-table/data-table";
-import { MedicineType } from "@/types";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function MedicineListPage() {
-  const [medicines, setMedicines] = useState<MedicineType[]>([]);
-
-  async function setMedicineList() {
-    const response = await getAllMedicines();
-
-    setMedicines(response);
-  }
-
-  useEffect(() => {
-    setMedicineList();
-  }, []);
+  const { medicines } = useGetMedicines();
   return (
     <section className="flex flex-col gap-2">
       <div className="flex gap-2">

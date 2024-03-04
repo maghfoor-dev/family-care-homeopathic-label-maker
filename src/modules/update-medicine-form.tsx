@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
+import useGetMedicines from "@/hooks/use-get-medicines";
 import db from "@/lib/database";
 import { MedicineType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -51,6 +52,7 @@ export default function UpdateMedicineForm({
 }) {
   console.log(currentMedicine, "IS THE CURRENT MEDICINE PASSED INTO THE FORM");
   const { toast } = useToast();
+  const { updateMedicines} = useGetMedicines()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -116,6 +118,7 @@ export default function UpdateMedicineForm({
     ];
     const database = await db;
     const response = await database.execute(query, params);
+    await updateMedicines() 
     return response;
   }
 
