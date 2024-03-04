@@ -43,7 +43,6 @@ const formSchema = z.object({
 });
 
 async function addMedicineToDatabase(data: z.infer<typeof formSchema>) {
-  console.log(data, "IS THE DATA");
   const {
     name,
     potency,
@@ -78,10 +77,6 @@ export default function AddMedicineForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const successfullyAdded = await addMedicineToDatabase(values);
-    console.log(
-      successfullyAdded,
-      "IS THE SUCESSFULLY ADDED VALUE ON SUBMITTING THE FORM"
-    );
     if (successfullyAdded) {
       toast({
         title: "Medicine Added!",

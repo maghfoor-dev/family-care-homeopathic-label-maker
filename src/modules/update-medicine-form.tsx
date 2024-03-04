@@ -50,7 +50,6 @@ export default function UpdateMedicineForm({
 }: {
   currentMedicine: MedicineType;
 }) {
-  console.log(currentMedicine, "IS THE CURRENT MEDICINE PASSED INTO THE FORM");
   const { toast } = useToast();
   const { updateMedicines} = useGetMedicines()
 
@@ -69,10 +68,6 @@ export default function UpdateMedicineForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const successfullyAdded = await updateMedicineInDatabase(values);
-    console.log(
-      successfullyAdded,
-      "IS THE SUCESSFULLY ADDED VALUE ON SUBMITTING THE FORM"
-    );
     if (successfullyAdded) {
       toast({
         title: "Medicine Updated!",

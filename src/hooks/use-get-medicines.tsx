@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 export default function useGetMedicines() {
     const [medicines, setMedicines] = useState<MedicineType[]>([])
 
+    console.log(medicines, 'is the value of medicines')
+
     useEffect(() => {
         updateMedicines()
     }, [])
