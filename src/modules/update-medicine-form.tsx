@@ -51,23 +51,25 @@ export default function UpdateMedicineForm({
   currentMedicine: MedicineType;
 }) {
   const { toast } = useToast();
-  const { updateMedicines} = useGetMedicines()
+  const { updateMedicines } = useGetMedicines();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: formSchema.parse({
-     name: currentMedicine.name,
-    category: currentMedicine.category,
-    potency: currentMedicine.potency,
-    quantity: currentMedicine.quantity,
-    sticker_name: currentMedicine.sticker_name,
-    sku_code: currentMedicine.sku_code,
-    stored_location: currentMedicine.stored_location  
-    })
+      name: currentMedicine.name,
+      category: currentMedicine.category,
+      potency: currentMedicine.potency,
+      quantity: currentMedicine.quantity,
+      sticker_name: currentMedicine.sticker_name,
+      sku_code: currentMedicine.sku_code,
+      stored_location: currentMedicine.stored_location,
+    }),
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const successfullyAdded = await updateMedicineInDatabase(values);
+    updateMedicines();
+
     if (successfullyAdded) {
       toast({
         title: "Medicine Updated!",
@@ -113,7 +115,6 @@ export default function UpdateMedicineForm({
     ];
     const database = await db;
     const response = await database.execute(query, params);
-    await updateMedicines() 
     return response;
   }
 
