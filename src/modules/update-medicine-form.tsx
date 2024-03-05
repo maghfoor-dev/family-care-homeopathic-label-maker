@@ -18,10 +18,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
+import { UpdateMedicinesContext } from "@/context/medicines-context";
 import useGetMedicines from "@/hooks/use-get-medicines";
 import db from "@/lib/database";
 import { MedicineType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
@@ -51,7 +53,7 @@ export default function UpdateMedicineForm({
   currentMedicine: MedicineType;
 }) {
   const { toast } = useToast();
-  const { updateMedicines } = useGetMedicines();
+  const { updateMedicines } = useContext(UpdateMedicinesContext);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

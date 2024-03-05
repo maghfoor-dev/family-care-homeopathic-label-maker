@@ -12,20 +12,24 @@ import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { deleteMedicine } from "@/lib/utils";
 import UpdateMedicineForm from "./update-medicine-form";
-import useGetMedicines from "@/hooks/use-get-medicines";
+import { useContext } from "react";
+import { UpdateMedicinesContext } from "@/context/medicines-context";
 
 export default function TableSheet({ medicine }: { medicine: MedicineType }) {
-  const { updateMedicines } = useGetMedicines();
+  const { updateMedicines } = useContext(UpdateMedicinesContext);
+
+  async function handleDeleteMedicineId(id: string | number) {
+    await deleteMedicine(id);
+    updateMedicines();
+  }
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -61,10 +65,7 @@ export default function TableSheet({ medicine }: { medicine: MedicineType }) {
             <SheetClose asChild>
               <Button
                 variant={"destructive"}
-                onClick={async () => {
-                  await deleteMedicine(medicine.id);
-                  updateMedicines();
-                }}
+                onClick={() => handleDeleteMedicineId(medicine.id)}
               >
                 Delete
               </Button>

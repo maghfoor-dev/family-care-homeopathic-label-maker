@@ -8,6 +8,7 @@ import NavBar from "./modules/navbar";
 import PrintQueuePage from "./pages/print-queue.page";
 import AddMedicineForm from "./pages/add-medicine.page";
 import { Toaster } from "./components/ui/toaster";
+import { UpdateMedicinesProvider } from "./context/medicines-context";
 
 const router = createBrowserRouter([
   {
@@ -24,17 +25,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/add-medicine",
-    element: <AddMedicineForm />
-  }
+    element: <AddMedicineForm />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <main className="flex flex-col max-w-7xl mx-auto gap-9">
-      <NavBar />
-      {/* <App /> */}
-      <RouterProvider router={router} />
-      <Toaster />
-    </main>
+    <UpdateMedicinesProvider>
+      <main className="flex flex-col max-w-7xl mx-auto gap-9">
+        <NavBar />
+        {/* <App /> */}
+        <RouterProvider router={router} />
+        <Toaster />
+      </main>
+    </UpdateMedicinesProvider>
   </React.StrictMode>
 );
