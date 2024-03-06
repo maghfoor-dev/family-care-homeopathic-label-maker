@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 // import { invoke } from "@tauri-apps/api/tauri";
 // import {
 //   NavigationMenu,
@@ -14,6 +14,8 @@ import {
 } from "../components/ui/card";
 import { Textarea } from "../components/ui/textarea";
 import { createCodesList, getAllMedicines } from "../lib/utils";
+import { UpdateMedicinesContext } from "@/context/medicines-context";
+import { MedicineType } from "@/types";
 
 
 const SKU_IDS = [
@@ -30,9 +32,9 @@ export default function HomePage() {
   // const [greetMsg, setGreetMsg] = useState("");
   // const [name, setName] = useState("");
   const [addedCodes, setAddedCodes] = useState<string[]>([]);
-  const [foundCodes, setFoundCodes] = useState<string[]>([]);
+  const [foundMedicines,setFoudnMedicines] = useState<MedicineType[]>([]);
   const [searchingMedicines, setSearchingMedicines] = useState<boolean>(false);
-
+  const { medicines, } = useContext(UpdateMedicinesContext)
   // async function greet() {
   //   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
   //   setGreetMsg(await invoke("greet", { name }));
@@ -45,18 +47,28 @@ export default function HomePage() {
 
   async function handleFindCodes() {
     setSearchingMedicines(true);
-    const foundCodesArr: string[] = [];
+    const foundCodesArr:MedicineType[] = [];
 
-    const medicines = await getAllMedicines();
-    const medicineIds = medicines.map((medicine) => medicine.sku_code);
+    // const medicineIds = medicines.map((medicine) => medicine.sku_code);
 
-    for (const code of addedCodes) {
+    /* for (const code of addedCodes) {
       if (medicineIds.includes(code)) {
         foundCodesArr.push(code);
       }
+    } */
+
+    const sku_medicines: {[key: string]: MedicineType} = {}
+
+    for (const medicine of medicines) {
+      sku_medicines[medicine.sku_code] = medicine
+    }
+    for (const code of addedCodes) {
+      if (code in sku_medicines) {
+        foundCodesArr.push(sku_medicines[code])
+      }
     }
 
-    setFoundCodes(foundCodesArr);
+    setFoudnMedicines(foundCodesArr);
     setSearchingMedicines(false);
   }
 
@@ -108,14 +120,14 @@ export default function HomePage() {
         <div className="flex flex-col justify-center gap-4">
           <Card className="min-card-width min-card-height">
             <CardHeader>
-              <CardTitle>Found Codes ({foundCodes.length})</CardTitle>
+              <CardTitle>Found Codes ({foundMedicines.length})</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="bg-gray-300 h-[400px] py-2 px-3 rounded-md flex flex-col gap-1 overflow-scroll overflow-x-hidden">
-                {foundCodes.map((foundCode) => {
+                {foundMedicines.map((foundCode) => {
                   return (
                     <Card className="bg-[#F2F5DE] p-2 text-sm">
-                      <div>{foundCode}</div>
+                      <div>{foundCode.sku_code}</div>
                     </Card>
                   );
                 })}
