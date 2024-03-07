@@ -24,6 +24,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useQueuedMedicinesContext } from "@/context/print-queue-context";
+import { useToast } from "@/components/ui/use-toast";
 
 const SKU_IDS = [
   "code-1",
@@ -42,6 +44,8 @@ export default function HomePage() {
   const [foundMedicines, setFoudnMedicines] = useState<MedicineType[]>([]);
   const [searchingMedicines, setSearchingMedicines] = useState<boolean>(false);
   const { medicines } = useContext(UpdateMedicinesContext);
+  const { queue, addToQueue } = useQueuedMedicinesContext();
+  const { toast } = useToast();
   // async function greet() {
   //   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
   //   setGreetMsg(await invoke("greet", { name }));
@@ -77,6 +81,21 @@ export default function HomePage() {
 
     setFoudnMedicines(foundCodesArr);
     setSearchingMedicines(false);
+  }
+
+  function handleAddMedicinesToQueue() {
+    for (const foundMedicine of foundMedicines) {
+      addToQueue({
+        ...foundMedicine,
+        queueId: queue.length + 1,
+      });
+    }
+    toast({
+      title: "Operation Successful!",
+      description: `${queue.length} medicines added to queue.`,
+      variant: "success",
+    });
+    setFoudnMedicines([]);
   }
 
   return (
@@ -160,7 +179,9 @@ export default function HomePage() {
               </div>
             </CardContent>
           </Card>
-          <Button variant={"secondary"}>Add to Queue</Button>
+          <Button variant={"secondary"} onClick={handleAddMedicinesToQueue}>
+            Add to Queue
+          </Button>
         </div>
       </section>
       <div>{JSON.stringify(addedCodes, null, 0)}</div>
