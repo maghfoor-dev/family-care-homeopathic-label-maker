@@ -9,6 +9,7 @@ import PrintQueuePage from "./pages/print-queue.page";
 import AddMedicineForm from "./pages/add-medicine.page";
 import { Toaster } from "./components/ui/toaster";
 import { UpdateMedicinesProvider } from "./context/medicines-context";
+import { QueuedMedicinesProvider } from "./context/print-queue-context";
 
 const router = createBrowserRouter([
   {
@@ -32,12 +33,14 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <UpdateMedicinesProvider>
-      <main className="flex flex-col max-w-7xl mx-auto gap-9">
-        <NavBar />
-        {/* <App /> */}
-        <RouterProvider router={router} />
-        <Toaster />
-      </main>
+      <QueuedMedicinesProvider>
+        <main className="flex flex-col max-w-7xl mx-auto gap-9">
+          <NavBar />
+          {/* <App /> */}
+          <RouterProvider router={router} />
+          <Toaster />
+        </main>
+      </QueuedMedicinesProvider>
     </UpdateMedicinesProvider>
   </React.StrictMode>
 );
