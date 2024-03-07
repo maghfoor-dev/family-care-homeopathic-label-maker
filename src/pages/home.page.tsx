@@ -16,7 +16,14 @@ import { Textarea } from "../components/ui/textarea";
 import { createCodesList, getAllMedicines } from "../lib/utils";
 import { UpdateMedicinesContext } from "@/context/medicines-context";
 import { MedicineType } from "@/types";
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const SKU_IDS = [
   "code-1",
@@ -32,9 +39,9 @@ export default function HomePage() {
   // const [greetMsg, setGreetMsg] = useState("");
   // const [name, setName] = useState("");
   const [addedCodes, setAddedCodes] = useState<string[]>([]);
-  const [foundMedicines,setFoudnMedicines] = useState<MedicineType[]>([]);
+  const [foundMedicines, setFoudnMedicines] = useState<MedicineType[]>([]);
   const [searchingMedicines, setSearchingMedicines] = useState<boolean>(false);
-  const { medicines, } = useContext(UpdateMedicinesContext)
+  const { medicines } = useContext(UpdateMedicinesContext);
   // async function greet() {
   //   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
   //   setGreetMsg(await invoke("greet", { name }));
@@ -47,7 +54,7 @@ export default function HomePage() {
 
   async function handleFindCodes() {
     setSearchingMedicines(true);
-    const foundCodesArr:MedicineType[] = [];
+    const foundCodesArr: MedicineType[] = [];
 
     // const medicineIds = medicines.map((medicine) => medicine.sku_code);
 
@@ -57,14 +64,14 @@ export default function HomePage() {
       }
     } */
 
-    const sku_medicines: {[key: string]: MedicineType} = {}
+    const sku_medicines: { [key: string]: MedicineType } = {};
 
     for (const medicine of medicines) {
-      sku_medicines[medicine.sku_code] = medicine
+      sku_medicines[medicine.sku_code] = medicine;
     }
     for (const code of addedCodes) {
       if (code in sku_medicines) {
-        foundCodesArr.push(sku_medicines[code])
+        foundCodesArr.push(sku_medicines[code]);
       }
     }
 
@@ -124,10 +131,29 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <div className="bg-gray-300 h-[400px] py-2 px-3 rounded-md flex flex-col gap-1 overflow-scroll overflow-x-hidden">
-                {foundMedicines.map((foundCode) => {
+                {foundMedicines.map((foundMedicine) => {
                   return (
-                    <Card className="bg-[#F2F5DE] p-2 text-sm">
-                      <div>{foundCode.sku_code}</div>
+                    <Card className="bg-[#F2F5DE] p-2 text-sm cursor-pointer">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <div>{foundMedicine.sku_code}</div>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                          <DialogHeader>
+                            <DialogTitle>{foundMedicine.name}</DialogTitle>
+                            <DialogDescription>
+                              <p>
+                                Stored Location: {foundMedicine.stored_location}
+                              </p>
+                              <p>Potency: {foundMedicine.potency}</p>
+                              <p>Quantity: {foundMedicine.quantity}</p>
+                              <p>SKU Code: {foundMedicine.sku_code}</p>
+                              <p>Category: {foundMedicine.category}</p>
+                              <p>Sticker Name: {foundMedicine.sticker_name}</p>
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>{" "}
                     </Card>
                   );
                 })}
