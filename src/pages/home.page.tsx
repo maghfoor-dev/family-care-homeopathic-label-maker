@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // import { invoke } from "@tauri-apps/api/tauri";
 // import {
 //   NavigationMenu,
@@ -46,6 +46,10 @@ export default function HomePage() {
   const { medicines } = useContext(UpdateMedicinesContext);
   const { queue, addToQueue } = useQueuedMedicinesContext();
   const { toast } = useToast();
+
+  useEffect(()=> {
+console.log(queue, 'IS THE QUEUE')
+  }, [queue])
   // async function greet() {
   //   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
   //   setGreetMsg(await invoke("greet", { name }));
@@ -85,6 +89,7 @@ export default function HomePage() {
 
   function handleAddMedicinesToQueue() {
     for (const foundMedicine of foundMedicines) {
+      console.log(foundMedicine, 'IS THE FOUND MEDICINE')
       addToQueue({
         ...foundMedicine,
         queueId: queue.length + 1,

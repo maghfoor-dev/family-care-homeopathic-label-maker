@@ -24,8 +24,7 @@ export function QueuedMedicinesProvider({ children }: { children: any }) {
   const [queue, setQueue] = useState<QueuedMedicine[]>([]);
 
   function addToQueue(medicine: QueuedMedicine) {
-    console.log(medicine, "IS THE BEING ADDED TO THE QUEUE");
-    setQueue([...queue, medicine]);
+    setQueue([medicine]);
   }
 
   const contextValue = { queue, addToQueue };

@@ -1,7 +1,8 @@
-import { useQueuedMedicinesContext } from "@/context/print-queue-context";
+import { QueuedMedicinesContext, useQueuedMedicinesContext } from "@/context/print-queue-context";
+import { useContext } from "react";
 
 export default function PrintQueuePage() {
-  const { queue } = useQueuedMedicinesContext();
+  const { queue, addToQueue } = useContext(QueuedMedicinesContext)
   console.log(queue, "IS THE QUEUE");
   return (
     <section>
