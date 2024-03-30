@@ -32,7 +32,16 @@ export async function getAllMedicines() {
 }
 
 export async function deleteMedicine(id: string | number) {
-const database = await db;
-const result = await database.execute(`DELETE FROM medicine_list where id = ${id}`)
-return result
+  const database = await db;
+  const result = await database.execute(
+    `DELETE FROM medicine_list where id = ${id}`
+  );
+  return result;
+}
+
+export async function getQueuedMedcinesList() {
+  const database = await db;
+  const queueList = await database.select("SELECT * FROM medicine_queue_list;");
+
+  return queueList;
 }
